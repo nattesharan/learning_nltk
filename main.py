@@ -65,3 +65,11 @@ text = nltk.corpus.genesis.words('english-kjv.txt')
 bigrams = nltk.bigrams(text)
 cfd = nltk.ConditionalFreqDist(bigrams)
 generate_model(cfd, 'living')
+'''Filtering a text: This program computes the vocabulary of a text, then removes all items
+that occur in an existing wordlist, leaving just the uncommon or misspelled words.'''
+def unusual_words(text):
+    text_vocab = set(w.lower() for w in text if w.isalpha())
+    english_vocab = set(w.lower() for w in nltk.corpus.words.words())
+    unusual = text_vocab.difference(english_vocab)
+    return sorted(unusual)
+print(unusual_words(nltk.corpus.nps_chat.words()))
